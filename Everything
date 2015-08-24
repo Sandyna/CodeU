@@ -22,18 +22,18 @@ isInDictionary("boo") = true;
 Code:
 
 isInDictionary(string word){
-int upperBound = 2, lowerBound = 0;
+int upperBound = -1, lowerBound = 1, currentPlace = 0;
   while(upperBound-lowerBound != 1){
     if(word == TrivialDictionary.wordAt(upperBound)){
       return true;
     }
     //if my word is bigger than the dictionary one, go ahead
-    if(word>TrivialDictionary.wordAt(upperBound)){
-      upperBound*=2;
+    if(word>TrivialDictionary.wordAt(currentPlace*2)){
+      lowerBound*=2;
     }
     //if my word is smaller, or I hit the end, go back
-    if(){
-      
+    if(word<TrivialDictionary.wordAt(currentPlace*2)){
+      upperBound =/2;
     }
   }
   return false;
