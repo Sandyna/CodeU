@@ -46,8 +46,6 @@ Thoughts on the problem:
 If I sort the numbers and I will take a look at median (or the bigger median in case of even number if values), 
 it will be a number representing majority - if the majority exists. 
 Then I could count how many times is that number present in my collection and wheter it is more than 50%. 
-No, then I will take a look at first value and if it's same than median, it's the majority value. 
-No, that won't work. It's not
 This will take O (n log n) for n numbers, because of the sort. 
 Another approach is to make a structure to keep track of how many times I have seen each number, then look if the highest value is high enough. 
 This will take O (n).
