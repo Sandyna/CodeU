@@ -1,11 +1,13 @@
 Exc 2
 Questions: 
+None so far. 
 Thoughts on the problem:
 If I sort the numbers and I will take a look at median (or the bigger median in case of even number if values), 
 it will be a number representing majority - if the majority exists. 
 Then I could count how many times is that number present in my collection and wheter it is more than 50%. 
 This will take O (n log n) for n numbers, because of the sort. 
-Another approach is to make a structure to keep track of how many times I have seen each number, then look if the highest value is high enough. 
+Another approach is to make a structure to keep track of how many times I have seen each number, then look 
+if the highest value is presnet more than half times. 
 This will take O (n).
 I will use the first method since it's simpler to code. 
 Questions for myself:
@@ -20,22 +22,6 @@ hasMajority(testThree) = 6
 testFour = {}
 hasMajority = null
 Code:
-hasMajority(ArrayList testCase){
-  testCase.sort();
-  int median = testCase.get((testCase.length()+1)/2);//if this doesn't work, split it into cases
-  int numberOfMedians = 0;
-  for(int i = 0; i<testCase.length(); i++){
-    if(testCase.get(i)==median){
-      numberOfMedians++;
-    }
-  }
-  if(numberOfMedians>testCase.length()/2){
-    return median;
-  } else {
-    return null;
-  }
-}
-Code after compilation:
 public static Integer hasMajority(List <Integer> testCase){
         Collections.sort(testCase);
         int median = testCase.get((testCase.size()+1)/2);
