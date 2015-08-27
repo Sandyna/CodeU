@@ -43,19 +43,66 @@ int upperBound = -1, lowerBound = 1, currentPlace = 0;
 Exc 2
 Questions: 
 Thoughts on the problem:
-If I sort the numbers and I will take a look at median, it will be a number representing majority - if the majority exists. 
+If I sort the numbers and I will take a look at median (or the bigger median in case of even number if values), 
+it will be a number representing majority - if the majority exists. 
 Then I could count how many times is that number present in my collection and wheter it is more than 50%. 
+No, then I will take a look at first value and if it's same than median, it's the majority value. 
+No, that won't work. It's not
 This will take O (n log n) for n numbers, because of the sort. 
 Another approach is to make a structure to keep track of how many times I have seen each number, then look if the highest value is high enough. 
-This will take O (n). 
+This will take O (n).
+I will use the first method since it's simpler to code. 
 Questions for myself:
 Will the second approach really take O(n)? What about memory? Can I use hash table?
 Test cases:
+testOne = {1, 14, 5, 5}
+hasMajority(testOne) = null
+testTwo = {1, 5, 14, 5, 5}
+hasMajority(testTwo) = 5
+testThree = {6, 6, 4, 6, 6, 7}
+hasMajority(testThree) = 6
+testFour = {}
+hasMajority = null
 Code:
-
+hasMajority(ArrayList testCase){
+  testCase.sort();
+  int median = testCase.get((testCase.length()+1)/2);//if this doesn't work, split it into cases
+  int numberOfMedians = 0;
+  for(int i = 0; i<testCase.length(); i++){
+    if(testCase.get(i)==median){
+      numberOfMedians++;
+    }
+  }
+  if(numberOfMedians>testCase.length()/2){
+    reutrn median;
+  } else {
+    return null;
+  }
+}
 Exc 3
 Questions:
+We can have several identical values in the array, for example {3, 4, 4, 5}. If that's the case, nthLargest(3) would 
+return 4 or 3? Would nthLargest(2) return the same value as nthLargest(3)? Can we have identical return values for 
+different inputs? I will work with that case. 
+Thoughts on the problem:
+We can sort it. O(s log s) where s is the size of array
+We can go through the array n-times to find out which is the n-th largest. O(n*s) or O(s^2) in the worst case. 
+We can have an array with n largest elements. I don't know how I can update it though. 
 
+TestCases:
+testOne = {7, 4, 6, 1}
+nthLargest = {4}
 
-
+Code:
+class largest{
+List <Integer> integers;
+  largest (List<Integer> input){
+    integers = input;
+  }
+  nthLargest(int n){
+    integers.sort;
+    integers.reversel
+    return integers.get(n);
+  }
+}
 
