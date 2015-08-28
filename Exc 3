@@ -6,22 +6,31 @@ different inputs? I will work with that case.
 Thoughts on the problem:
 We can sort it. O(s log s) where s is the size of array
 We can go through the array n-times to find out which is the n-th largest. O(n*s) or O(s^2) in the worst case. 
-We can have an array with n largest elements. I don't know how I can update it though. 
+We can have an array with n largest elements. I don't know how I can update it though. And I guess it's too slow. 
 For each element, we can tell in linear time at which position it is and which elements are smaller/bigger/same than it. 
 
 TestCases:
 testOne = {7, 4, 6, 1}
-nthLargest = {4}
+nthLargest(3) = 4
+testTwo = {0, 14, 5, -8, 4}
+nthLargest(5) = -8
+testThree = {}
+nthLargest(1) = Out of Boundary Exception
 
 Code:
-class largest{
-List <Integer> integers;
-  largest (List<Integer> input){
-    integers = input;
-  }
-  nthLargest(int n){
-    integers.sort;
-    integers.reversel
-    return integers.get(n);
-  }
+public class Largest {
+    List integers = new ArrayList<Integer>();
+    Largest(List input){
+        integers = input;
+        //I sort the list here, so I don't do it every time I call nthLargest()
+        Collections.sort(integers);
+        Collections.reverse(integers);
+    }
+    public int nthLargest(int n) throws Exception {
+        if(n==0 || n>integers.size()) {
+            throw new Exception("Out of Boundary Exception");
+        } else {
+            return (int) integers.get(n-1);
+        }
+    }
 }
