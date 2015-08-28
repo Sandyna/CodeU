@@ -1,0 +1,44 @@
+Exc 4
+Questions:
+I'm not sure how to work with Iterators. 
+Thoughts on the problem:
+
+
+Code:
+
+public class Query {
+    public int timeStamp;
+    public String listOfWords;
+    //constructor
+    Query(String input){
+        listOfWords = input;
+    }
+}
+
+
+public class QueryStream  implements Iterator<String> {
+    List queryObjects;
+    QueryStream(ArrayList<Query> input){
+        queryObjects = input;
+    }
+    int positionQS=0;
+    int positionQery=0;
+    @Override
+    public boolean hasNext() {
+        if(queryObjects.size()<positionQS) {
+            Query tempQ = (Query) queryObjects.get(positionQS);
+            //here should go the part when I'm going through the list of words from Query
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String next() {
+        if(queryObjects.size()<positionQS){
+            Query tempQ = (Query) queryObjects.get(positionQS);
+            return tempQ.listOfWords;
+        }
+        return null;
+    }
+}
