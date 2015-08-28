@@ -1,14 +1,14 @@
 Exc 1
 Questions: 
-Is the dictionary in alphabetical order?
+Is the dictionary in alphabetical order? 
 Thoughts on the problem: 
 Obvious but slow solution is to go through all the words in the given dictionary that are "smaller" than my word. 
 To fasten this up, I  can use a binary search. I can't use classic binary search since I don't know the length of the dictionary. 
-Instead of this, I will use a modified version which goes from the start, always jumping forward by an increasing power of two.
-Whenever I reach the end of the dictionary, or a "bigger" word than my one, I will go backward by half of the last jump and do the
-classic binary search from there. 
-Beware the last element!
+Instead of this, I could use a modified version which goes from the start, always jumping forward by an increasing power of two. (2, 4, 8...)
+Since that approach is messy, I will use the classic binary search because it's easier to code and I will set the 
+upperBound to a really big number. 
 Questions for myself: What if the word isn't in the dictionary? How can I set the upperBound? (in the first part, when going up)
+Beware the last element. 
 Test cases:
 Case one:
 TrivialDictionary = {"", "boo", "foo", "moo", "zoo"};
@@ -23,30 +23,21 @@ isInDictionary("boo") = true;
 
 Code:
 
-isInDictionary(string word){
-int upperBound = -1, lowerBound = 1;
-  while(upperBound-lowerBound != 1){
-    if(word == TrivialDictionary.wordAt(upperBound)){
-      return true;
+    public boolean isInDictionary(String word){
+        int upperBound = 999999999, lowerBound = 0;
+        while(upperBound-lowerBound != 1){
+            if(word == wordAt((lowerBound))){
+                return true;
+            }
+            if((wordAt((upperBound+lowerBound)/2) == null) ||
+                    (word.compareTo((String) wordAt((upperBound+lowerBound)/2))<0)){
+                upperBound = (upperBound+lowerBound)/2;
+            } else {
+                lowerBound = (upperBound+lowerBound)/2;
+            }
+        }
+        if(word == wordAt(lowerBound)){
+            return true;
+        }
+        return false;
     }
-    if(upperBound == -1){
-      //if my word is bigger than the dictionary one, go ahead
-      if(word>TrivialDictionary.wordAt(lowerBound*2)){
-        lowerBound*=2;
-      }
-      //if my word is smaller, or I hit the end, set the upperBound
-      if((word<TrivialDictionary.wordAt(lowerBound*2) || TrivialDictionary.wordAt(lowerBound*2)==null)){
-        upperBound = lowerBound*2;
-      }
-    } else {
-    //we have upperBound and lowerBound, we can do binary search
-      if(word > TrivialDictionary.wordAt(upperBound+lowerBound)/2){
-        lowerBound = (upperBound+lowerBound)/2;
-      } else {
-        upperBound = (upperBound+lowerBound)/2;
-      }
-    }
-  }
-  return false;
-}
-
